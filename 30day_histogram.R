@@ -18,4 +18,4 @@ outcome[, 11] <- as.numeric(outcome[, 11])
 
 #makes a simple histogram of the 30 day mortality rates of heart attacks
 
-hist(outcome[, 11])
+hist(outcome[, 11]}
