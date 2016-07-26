@@ -1,4 +1,4 @@
-best <- function(statev, outcomev){
+rankhospital <- function(statev, outcomev, num1 = "best"){
     
     #Reads Data
     
@@ -29,41 +29,58 @@ best <- function(statev, outcomev){
     
     colnames(split.state) <- c("hospital", "state", "attack", "failure", "pneumonia")
     
-    #Collects hospitals with lowest mortality in the specified outcome
+    #Removes NA values
+    
+    good <- complete.cases(split.state)
+    
+    split.state <- split.state[good, ]
+    
+    
+    #Assigns num1 character values to integers
+    
+    if(num1 == "best"){
+        
+        num1 <- 1
+    }
+    
+    else if(num1 == "worst"){
+        
+        num1 <- nrow(split.state)
+    }
+    
+    else{
+        
+        a <- "this is random"
+    }
+    
+    #Selects the hospital based on num1 and breaks ties by alphabetical order using order()
     
     if(outcomev == "heart attack"){
         
-        lowest.mortality <- min(split.state$attack, na.rm = TRUE)
+        lowest.mortality <- split.state[order(split.state$attack, split.state$hospital), ]
         
-        lowest.mortality <- which(split.state$attack == lowest.mortality)
-        
-        best.hospital <- split.state$hospital[lowest.mortality]
+        best.hospital <- lowest.mortality$hospital[num1]
     }
     
     else if(outcomev == "heart failure"){
         
-        lowest.mortality <- min(split.state$failure, na.rm = TRUE)
+        lowest.mortality <- split.state[order(split.state$failure, split.state$hospital), ]
         
-        lowest.mortality <- which(split.state$failure == lowest.mortality)
-        
-        best.hospital <- split.state$hospital[lowest.mortality]
+        best.hospital <- lowest.mortality$hospital[num1]
         
     }
     
     else if(outcomev == "pneumonia"){
         
-        lowest.mortality <- min(split.state$pneumonia, na.rm = TRUE)
+        lowest.mortality <- split.state[order(split.state$pneumonia, split.state$hospital), ]
         
-        lowest.mortality <- which(split.state$pneumonia == lowest.mortality)
-        
-        best.hospital <- split.state$hospital[lowest.mortality]
+        best.hospital <- lowest.mortality$hospital[num1]
         
     }
     
     
-    
-    #Returns the best hospital sorted in alphabetical order
-    best.hospital <- sort(as.vector(best.hospital))[1]
+    #Returns the hospital called by num1, breaking ties by alphabetical order
+
     
     best.hospital
     
