@@ -62,7 +62,7 @@ best <- function(statev, outcomev){
     
     
     
-    #Returns the best hospital sorted in alphabetical order
+    #Returns the best hospital, breaking ties in alphabetical order
     best.hospital <- sort(as.vector(best.hospital))[1]
     
     best.hospital
