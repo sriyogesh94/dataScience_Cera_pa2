@@ -57,24 +57,24 @@ rankhospital <- function(statev, outcomev, num1 = "best"){
     
     if(outcomev == "heart attack"){
         
-        lowest.mortality <- split.state[order(split.state$attack, split.state$hospital), ]
+        ranked.mortality <- split.state[order(split.state$attack, split.state$hospital), ]
         
-        best.hospital <- lowest.mortality$hospital[num1]
+        ranked.hospital <- ranked.mortality$hospital[num1]
     }
     
     else if(outcomev == "heart failure"){
         
-        lowest.mortality <- split.state[order(split.state$failure, split.state$hospital), ]
+        ranked.mortality <- split.state[order(split.state$failure, split.state$hospital), ]
         
-        best.hospital <- lowest.mortality$hospital[num1]
+        ranked.hospital <- ranked.mortality$hospital[num1]
         
     }
     
     else if(outcomev == "pneumonia"){
         
-        lowest.mortality <- split.state[order(split.state$pneumonia, split.state$hospital), ]
+        ranked.mortality <- split.state[order(split.state$pneumonia, split.state$hospital), ]
         
-        best.hospital <- lowest.mortality$hospital[num1]
+        ranked.hospital <- ranked.mortality$hospital[num1]
         
     }
     
@@ -82,6 +82,6 @@ rankhospital <- function(statev, outcomev, num1 = "best"){
     #Returns the hospital called by num1, breaking ties by alphabetical order
 
     
-    best.hospital
+    ranked.hospital
     
 }
